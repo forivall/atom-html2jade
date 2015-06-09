@@ -18,7 +18,8 @@ module.exports =
         selection = null
         editor.getText()
     html = "#{html}".replace /\>\s+\</, '><' # HACK: FIXME:
-    html2jade.convertHtml html, { bodyless: true }, (err, jade) ->
+    hasBody = "#{html}".indexOf('<body>') >= 0
+    html2jade.convertHtml html, { bodyless: not hasBody }, (err, jade) ->
       if err
         atom.notifications.addError(err.name or err.toString(), {detail: e.message})
         return
