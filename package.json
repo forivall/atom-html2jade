@@ -1,7 +1,7 @@
 {
   "name": "html2jade-plus",
   "main": "./lib/html2jade-plus",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Convert HTML selection to jade.",
   "activationCommands": {
     "atom-text-editor": [
