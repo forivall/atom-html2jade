@@ -24,6 +24,18 @@ module.exports =
       description: 'Do not html encode special characters.
        This is useful for template files which may contain
        expressions like {{username}}'
+    bodyless:
+      title: 'Omit surrounding body tags'
+      type: 'string'
+      default: 'auto'
+      enum: [
+        'auto'
+        'true'
+        'false'
+      ]
+      description: 'Do not output enveloping html and body tags.
+       The default will omit body tags if the input does not
+       contain a body tag'
     numeric:
       title: 'Use numeric character entities'
       type: 'boolean'
@@ -61,13 +73,15 @@ module.exports =
         selection = null
         editor.getText()
     html = "#{html}".replace /\>\s+\</, '><' # HACK: FIXME:
-    hasBody = "#{html}".indexOf('<body>') >= 0
+    bodylessConfig = atom.config.get('html2jade-plus.bodyless')
+    bodyless = if bodylessConfig is 'auto' then "#{html}".indexOf('<body') < 0
+    else if bodylessConfig is 'true' then true else false
     opts =
       double: atom.config.get('html2jade-plus.double')
       nspaces: atom.config.get('html2jade-plus.nspaces')
       tabs: atom.config.get('html2jade-plus.tabs')
       donotencode: atom.config.get('html2jade-plus.donotencode')
-      bodyless: not hasBody
+      bodyless: bodyless
       numeric: atom.config.get('html2jade-plus.numeric')
       scalate: atom.config.get('html2jade-plus.scalate')
       noattrcomma: atom.config.get('html2jade-plus.noattrcomma')
