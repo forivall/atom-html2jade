@@ -3,6 +3,7 @@
   "main": "./lib/html2jade-plus",
   "version": "1.0.0",
   "description": "Convert HTML selection to jade.",
+  "keywords": ["fork", "html", "jade", "convert", "transpile", "markup"],
   "activationCommands": {
     "atom-text-editor": [
       "html2jade-plus:convert"
